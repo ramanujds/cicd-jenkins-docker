@@ -35,8 +35,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withCredentials([usernameColonPassword(credentialsId: 'docker-login', variable: 'docker_login')])  {
-                        sh 'docker login -u ram1uj -p ${docker_login}'
+                    withCredentials([string(credentialsId: 'dockerhub_pdw', variable: 'dockerhub_pwd')])  {
+                        sh 'docker login -u ram1uj -p ${dockerhub_pwd}'
                         sh "docker push ram1uj/spring-boot-app"
                         echo 'Docker Image Push Success'
                     }
